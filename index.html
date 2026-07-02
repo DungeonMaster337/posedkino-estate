@@ -269,6 +269,9 @@
   .cell .num { margin-bottom: auto; }
   .cell h3 { margin-top: 40px; }
   .cell p { margin-top: 12px; font-size: 15px; }
+  .cell__top { display: flex; align-items: center; justify-content: space-between; }
+  .cell__ic svg { width: 34px; height: 34px; stroke: var(--bronze); fill: none; opacity: .92; }
+  .cell__top .num { margin: 0; }
 
   /* ============================================================
      03 — Дом (галерея)
@@ -298,6 +301,20 @@
   }
   .media a:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.5); }
   .media a small { font-family: var(--sans); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #B7C0AE; }
+  /* Медиа-блок с фото */
+  .media-cards { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 44px; }
+  @media (min-width: 720px) { .media-cards { grid-template-columns: repeat(3, 1fr); } }
+  .mcard { display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,.16); border-radius: 2px; overflow: hidden; background: rgba(255,255,255,.03); transition: transform .3s ease, border-color .3s ease; }
+  .mcard:hover { border-color: rgba(255,255,255,.5); transform: translateY(-3px); }
+  .mcard figure { overflow: hidden; }
+  .mcard img { width: 100%; height: 210px; object-fit: cover; display: block; transition: transform .5s ease; }
+  .mcard:hover img { transform: scale(1.04); }
+  .mcard__b { padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+  .mcard__b b { font-family: var(--serif); font-size: 20px; font-weight: 500; color: var(--cream); }
+  .mcard__b span { font-family: var(--sans); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #B7C0AE; }
+  .media-more { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; font-size: 13.5px; color: #9FA893; }
+  .media-more a { color: var(--cream); border-bottom: 1px solid rgba(207,199,180,.3); padding-bottom: 1px; transition: border-color .2s; }
+  .media-more a:hover { border-color: #CFC7B4; }
 
   /* ============================================================
      05 — Ягодное ядро (datalist)
@@ -496,12 +513,30 @@
     </div>
 
     <div class="cards6">
-      <div class="cell reveal"><span class="num">01</span><div><h3>Земля и природа</h3><p>Массив около 5 га у леса, тупиковая локация, ощущение уединения.</p></div></div>
-      <div class="cell reveal d1"><span class="num">02</span><div><h3>Деревянный дом</h3><p>Большой сруб около 300 м² с высокой гостиной и террасой.</p></div></div>
-      <div class="cell reveal d2"><span class="num">03</span><div><h3>Клубничные посадки</h3><p>Около 2 га действующей плантации, понятная агротехнология.</p></div></div>
-      <div class="cell reveal"><span class="num">04</span><div><h3>Инфраструктура</h3><p>Склад ~240 м², производственное здание ~384 м², хозпостройки.</p></div></div>
-      <div class="cell reveal d1"><span class="num">05</span><div><h3>Существующий спрос</h3><p>Ягода продаётся без полноценного маркетинга — сарафан и постоянные клиенты.</p></div></div>
-      <div class="cell reveal d2"><span class="num">06</span><div><h3>Круглогодичность</h3><p>Потенциал монетизации вне ягодного сезона — туризм, события, продукты.</p></div></div>
+      <div class="cell reveal">
+        <div class="cell__top"><span class="cell__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="17.5" cy="7" r="2.3"/><path d="M3 15.5c3-2.6 6-4 9-4s6 1.4 9 4"/><path d="M3 20c3.5-3 6.5-4.5 9-4.5s5.5 1.5 9 4.5"/></svg></span><span class="num">01</span></div>
+        <div><h3>Земля и природа</h3><p>Массив около 5 га у леса, тупиковая локация, ощущение уединения.</p></div>
+      </div>
+      <div class="cell reveal d1">
+        <div class="cell__top"><span class="cell__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 4l8.5 6.5"/><path d="M5.5 9.4V20h13V9.4"/><path d="M9.5 20v-5.5h5V20"/></svg></span><span class="num">02</span></div>
+        <div><h3>Деревянный дом</h3><p>Большой сруб около 300 м² с высокой гостиной и террасой.</p></div>
+      </div>
+      <div class="cell reveal d2">
+        <div class="cell__top"><span class="cell__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8.5"/><path d="M12 12.5c0-3.2 2.1-5.3 5.2-5.3-.1 3.2-2.1 5.3-5.2 5.3Z"/><path d="M12 14.5c0-2.7-1.9-4.5-4.8-4.5.1 2.7 2 4.5 4.8 4.5Z"/></svg></span><span class="num">03</span></div>
+        <div><h3>Клубничные посадки</h3><p>Около 2 га действующей плантации, понятная агротехнология.</p></div>
+      </div>
+      <div class="cell reveal">
+        <div class="cell__top"><span class="cell__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8.75" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="3.5" y="13.5" width="6.5" height="6.5" rx="1"/><rect x="14" y="13.5" width="6.5" height="6.5" rx="1"/></svg></span><span class="num">04</span></div>
+        <div><h3>Инфраструктура</h3><p>Склад ~240 м², производственное здание ~384 м², хозпостройки.</p></div>
+      </div>
+      <div class="cell reveal d1">
+        <div class="cell__top"><span class="cell__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.4 9.4a2 2 0 0 1-2 1.7H7.4a2 2 0 0 1-2-1.7L4 9Z"/><path d="M8.5 9 11 4M15.5 9 13 4"/><path d="M9.3 13v3.4M14.7 13v3.4"/></svg></span><span class="num">05</span></div>
+        <div><h3>Существующий спрос</h3><p>Ягода продаётся без полноценного маркетинга — сарафан и постоянные клиенты.</p></div>
+      </div>
+      <div class="cell reveal d2">
+        <div class="cell__top"><span class="cell__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.8"/><path d="M12 2.5v2.3M12 19.2v2.3M2.5 12h2.3M19.2 12h2.3M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg></span><span class="num">06</span></div>
+        <div><h3>Круглогодичность</h3><p>Потенциал монетизации вне ягодного сезона — туризм, события, продукты.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -540,14 +575,26 @@
       <h2>Проект с историей, а не случайный дачный участок</h2>
       <p>С объектом связаны фермерские бренды и публичные упоминания: КФХ «Доброе поле», «Фермерский сок», «Клубничный хутор». Ранее хозяйство фигурировало в медиа и поставочных историях, связанных с натуральной фермерской продукцией — в том числе с премиальным ритейлом.</p>
     </div>
-    <div class="media reveal d1">
-      <a href="https://www.fermsok.ru/" target="_blank" rel="noopener">Фермерский сок <small>fermsok.ru ↗</small></a>
-      <a href="https://www.eco-lakomka.ru/farmers/41" target="_blank" rel="noopener">Эко-Лакомка <small>КФХ «Доброе Поле» ↗</small></a>
-      <a href="https://av.ru/lp/farm/farmer/Yaroslavzvyagin/" target="_blank" rel="noopener">Азбука вкуса <small>фермер ↗</small></a>
-      <a href="https://abnews.ru/news/mosreg/2022/12/15/fermerskoe-hozyajstvo-dobroe-pole-iz-mytishh-proizvelo-150-tonn-soka-i-100-tonn-morsa" target="_blank" rel="noopener">АБН <small>150 т сока, 100 т морса ↗</small></a>
-      <a href="https://yandex.ru/maps/" target="_blank" rel="noopener">Яндекс Карты <small>«Клубничный хутор» ↗</small></a>
+    <div class="media-cards">
+      <a class="mcard reveal" href="https://www.fermsok.ru/" target="_blank" rel="noopener">
+        <figure><img src="assets/media-fermsok.jpg" alt="Фермеры хозяйства у фермы — бренд «Фермерский сок»" loading="lazy" /></figure>
+        <div class="mcard__b"><b>Фермерский сок</b><span>fermsok.ru ↗</span></div>
+      </a>
+      <a class="mcard reveal d1" href="https://www.eco-lakomka.ru/farmers/41" target="_blank" rel="noopener">
+        <figure><img src="assets/media-dobroepole.jpg" alt="Стенд КФХ «Доброе Поле» с соком прямого отжима на выставке" loading="lazy" /></figure>
+        <div class="mcard__b"><b>Доброе Поле · Эко-Лакомка</b><span>eco-lakomka.ru ↗</span></div>
+      </a>
+      <a class="mcard reveal d2" href="https://yandex.ru/maps/" target="_blank" rel="noopener">
+        <figure><img src="assets/berry-kiosk.jpg" alt="Точка продаж «Клубничный хутор» — объект на Яндекс Картах" loading="lazy" /></figure>
+        <div class="mcard__b"><b>Клубничный хутор</b><span>Яндекс Карты ↗</span></div>
+      </a>
     </div>
-    <p style="margin-top:34px;font-size:13.5px;color:#9FA893;max-width:60ch">Медиа-история и первоисточники — доверительный актив объекта. Полный дайджест публикаций и материалов входит в закрытый инвест-пакет.</p>
+    <div class="media-more reveal d1">
+      <span>Также в публикациях:</span>
+      <a href="https://av.ru/lp/farm/farmer/Yaroslavzvyagin/" target="_blank" rel="noopener">Азбука вкуса ↗</a>
+      <a href="https://abnews.ru/news/mosreg/2022/12/15/fermerskoe-hozyajstvo-dobroe-pole-iz-mytishh-proizvelo-150-tonn-soka-i-100-tonn-morsa" target="_blank" rel="noopener">АБН — 150 т сока, 100 т морса ↗</a>
+    </div>
+    <p style="margin-top:30px;font-size:13.5px;color:#9FA893;max-width:60ch">Медиа-история и первоисточники — доверительный актив объекта. Полный дайджест публикаций и материалов входит в закрытый инвест-пакет.</p>
   </div>
 </section>
 
