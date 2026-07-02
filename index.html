@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Помечаем, что JS активен. Если JS выключен (напр. iOS Quick Look / просмотр как файла)
+     — класс не добавится и весь контент останется видимым по умолчанию. -->
+<script>document.documentElement.classList.add('js');</script>
+<title>Фермерская усадьба в Поседкино · Мытищинский округ — закрытое инвестиционное предложение</title>
+<meta name="description" content="Действующая фермерская усадьба у леса в Мытищинском округе: земля около 5 га, деревянный дом ~300 м², клубничные посадки и инфраструктура. Основа для агротуризма, камерных событий и фермерского производства." />
+<meta name="robots" content="noindex, nofollow" />
+<meta property="og:title" content="Фермерская усадьба в Поседкино — закрытое инвестиционное предложение" />
+<meta property="og:description" content="Редкий загородный актив у леса в Мытищинском округе с действующим ягодным ядром и потенциалом круглогодичного проекта." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     Фермерская усадьба «Поседкино» — инвест-лендинг
+     Стиль: rustic premium / natural luxury (Aman · Six Senses)
+     Палитра: warm neutrals + терракота/олива + бронза
+     ============================================================ */
+
+  :root {
+    --paper:      #F4EFE6;   /* молочный фон */
+    --paper-deep: #EDE6D9;   /* тёплый второй тон */
+    --cream:      #FBF8F1;
+    --ink:        #23201B;   /* графит-коричневый текст */
+    --ink-soft:   #55504733; /* хайрлайны */
+    --muted:      #6E675B;   /* приглушённый текст */
+    --forest:     #2E3A2C;   /* глубокий зелёный */
+    --forest-2:   #3C4A38;
+    --bronze:     #9A7A45;   /* бронза/латунь акцент */
+    --bronze-dk:  #7C6236;
+    --earth:      #7A5A3C;   /* древесный */
+    --berry:      #8E4A50;   /* мягкий ягодный, не яркий */
+    --shadow-sm:  0 1px 2px rgba(35,32,27,.05), 0 4px 14px rgba(35,32,27,.05);
+    --shadow-md:  0 2px 6px rgba(35,32,27,.06), 0 18px 50px rgba(35,32,27,.10);
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans:  "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono:  ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --wrap: 1240px;
+    --gutter: clamp(20px, 5vw, 96px);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--bronze); color: var(--cream); }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ---------- Типографика ---------- */
+  .kicker {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--bronze-dk);
+    display: inline-flex;
+    align-items: center;
+    gap: .7em;
+  }
+  .kicker::before {
+    content: "";
+    width: 28px; height: 1px;
+    background: var(--bronze);
+    display: inline-block;
+    opacity: .7;
+  }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.05; letter-spacing: -.01em; }
+  h2 { font-size: clamp(30px, 4.6vw, 60px); }
+  h3 { font-size: clamp(21px, 2.2vw, 28px); font-weight: 500; }
+  p  { color: var(--muted); }
+  .lead { font-size: clamp(18px, 1.5vw, 21px); color: var(--ink); line-height: 1.5; }
+
+  .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    color: var(--bronze-dk);
+  }
+
+  /* ---------- Раскладка ---------- */
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: var(--gutter); }
+  section { position: relative; }
+  .band { padding-block: clamp(72px, 10vw, 150px); }
+  .band--tight { padding-block: clamp(56px, 7vw, 104px); }
+  .rule { height: 1px; background: var(--ink-soft); border: 0; }
+
+  .sec-head { max-width: 760px; }
+  .sec-head .kicker { margin-bottom: 22px; }
+  .sec-head p { margin-top: 20px; max-width: 62ch; }
+
+  /* ---------- Кнопки ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .6em;
+    font-family: var(--sans); font-size: 14.5px; font-weight: 600;
+    letter-spacing: .02em;
+    padding: 15px 28px;
+    border-radius: 2px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+    will-change: transform;
+  }
+  .btn--primary { background: var(--forest); color: var(--cream); }
+  .btn--primary:hover { background: var(--forest-2); transform: translateY(-2px); }
+  .btn--ghost { background: transparent; color: var(--ink); border-color: rgba(35,32,27,.28); }
+  .btn--ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .btn--bronze { background: var(--bronze); color: var(--cream); }
+  .btn--bronze:hover { background: var(--bronze-dk); transform: translateY(-2px); }
+  .btn--lg { padding: 18px 36px; font-size: 15.5px; }
+  .btn .arw { transition: transform .25s ease; }
+  .btn:hover .arw { transform: translateX(4px); }
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+  header {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    transition: background .35s ease, box-shadow .35s ease, backdrop-filter .35s;
+  }
+  header .bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-block: 20px; transition: padding .35s ease;
+  }
+  header.stuck { background: rgba(244,239,230,.82); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--ink-soft); }
+  header.stuck .bar { padding-block: 13px; }
+  .brand { display: flex; flex-direction: column; line-height: 1; }
+  /* по умолчанию шапка лежит поверх тёмного hero → светлый текст */
+  .brand b { font-family: var(--serif); font-weight: 600; font-size: 22px; letter-spacing: .01em; color: var(--cream); transition: color .3s ease; }
+  .brand span { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: rgba(251,248,241,.7); margin-top: 5px; transition: color .3s ease; }
+  nav.main { display: flex; align-items: center; gap: 34px; }
+  nav.main a.lnk { font-size: 14px; font-weight: 500; color: var(--cream); opacity: .85; transition: opacity .2s, color .3s ease; }
+  nav.main a.lnk:hover { opacity: 1; }
+  /* при скролле шапка на молочном фоне → тёмный текст */
+  header.stuck .brand b { color: var(--ink); }
+  header.stuck .brand span { color: var(--muted); }
+  header.stuck nav.main a.lnk { color: var(--ink); opacity: .78; }
+  .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
+  .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--cream); margin: 5px 0; transition: .3s; }
+  header.stuck .nav-toggle span { background: var(--ink); }
+
+  @media (max-width: 900px) {
+    nav.main {
+      position: fixed; inset: 0 0 0 auto; width: min(80vw, 340px);
+      background: var(--cream); flex-direction: column; align-items: flex-start;
+      justify-content: center; gap: 26px; padding: 40px;
+      transform: translateX(100%); transition: transform .4s cubic-bezier(.7,0,.2,1);
+      box-shadow: var(--shadow-md);
+    }
+    nav.main.open { transform: translateX(0); }
+    nav.main a.lnk { font-size: 18px; color: var(--ink); opacity: .9; } /* панель молочная → тёмный текст */
+    .nav-toggle { display: block; z-index: 60; }
+    header.nav-open .nav-toggle span { background: var(--ink); } /* бургер поверх молочной панели */
+    header.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    header.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    header.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+  nav.main .btn { padding: 12px 22px; }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    min-height: 100svh;
+    display: flex; align-items: flex-end;
+    position: relative;
+    color: var(--cream);
+    overflow: hidden;
+  }
+  /* фон = фото-слот: живой природный тон вместо фейкового здания */
+  .hero__bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(120% 90% at 70% 15%, rgba(120,140,95,.35), transparent 55%),
+      linear-gradient(180deg, #3b4632 0%, #2c3626 42%, #20281d 100%);
+  }
+  .hero__bg::after {  /* тонкая текстура-опушка снизу */
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(20,26,17,.82) 0%, rgba(20,26,17,.15) 45%, rgba(20,26,17,.35) 100%);
+  }
+  .hero__grain { position: absolute; inset: 0; z-index: 1; opacity: .06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .hero .wrap { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(40px, 6vh, 72px); padding-top: 118px; }
+  .hero .kicker { color: #E4D9BE; }
+  .hero .kicker::before { background: #E4D9BE; }
+  .hero h1 {
+    font-size: clamp(36px, 5vw, 68px);
+    font-weight: 500; max-width: 18ch; margin: 22px 0 0;
+    letter-spacing: -.015em; line-height: 1.05;
+    text-wrap: balance;
+  }
+  .hero h1 em { font-style: italic; color: #E9DDC0; }
+  .hero__sub { max-width: 56ch; margin-top: 26px; color: #EAE4D6; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.55; }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
+  .hero .btn--ghost { color: var(--cream); border-color: rgba(255,255,255,.4); }
+  .hero .btn--ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
+  .hero__facts {
+    display: flex; flex-wrap: wrap; gap: 0;
+    margin-top: 54px; border-top: 1px solid rgba(255,255,255,.18);
+    padding-top: 26px;
+  }
+  .hero__facts div { padding-right: 34px; margin-right: 34px; border-right: 1px solid rgba(255,255,255,.16); }
+  .hero__facts div:last-child { border: 0; margin: 0; padding-right: 0; }
+  .hero__facts b { display: block; font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--cream); line-height: 1; }
+  .hero__facts span { font-size: 12.5px; color: #CFC7B4; letter-spacing: .04em; margin-top: 8px; display: block; }
+  .scrollcue { position: absolute; left: var(--gutter); bottom: 26px; z-index: 3; font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: #CFC7B4; display: flex; align-items: center; gap: 10px; }
+  .scrollcue i { width: 1px; height: 34px; background: linear-gradient(#CFC7B4, transparent); display: block; animation: cue 2.2s ease-in-out infinite; transform-origin: top; }
+  @keyframes cue { 0%,100% { transform: scaleY(.4); opacity:.4 } 50% { transform: scaleY(1); opacity:1 } }
+
+  /* ============================================================
+     Reusable: photo slot (shot list)
+     ============================================================ */
+  .shot {
+    position: relative; background: var(--paper-deep);
+    border: 1px solid var(--ink-soft);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; color: var(--muted);
+    aspect-ratio: 4 / 3;
+  }
+  .shot::before { /* тонкий уголковый маркер */
+    content: ""; position: absolute; inset: 12px; border: 1px solid rgba(122,90,60,.22); pointer-events: none;
+  }
+  .shot__in { text-align: center; padding: 24px; max-width: 90%; }
+  .shot__ico { width: 30px; height: 30px; margin: 0 auto 14px; opacity: .5; }
+  .shot__lbl { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--bronze-dk); font-weight: 600; }
+  .shot__txt { font-family: var(--serif); font-size: 19px; color: var(--ink); margin-top: 8px; line-height: 1.2; font-style: italic; }
+  .shot--tall { aspect-ratio: 3 / 4; }
+  .shot--wide { aspect-ratio: 16 / 9; }
+  .shot--sq   { aspect-ratio: 1 / 1; }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  /* ============================================================
+     02 — Готовая база
+     ============================================================ */
+  .split { display: grid; grid-template-columns: 1fr; gap: clamp(36px, 5vw, 80px); align-items: start; }
+  @media (min-width: 900px) { .split--41 { grid-template-columns: 1.05fr .95fr; } }
+
+  .cards6 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--ink-soft); border: 1px solid var(--ink-soft); margin-top: 54px; }
+  @media (min-width: 760px) { .cards6 { grid-template-columns: repeat(3, 1fr); } }
+  .cell {
+    background: var(--paper); padding: clamp(26px, 3vw, 40px);
+    min-height: 210px; display: flex; flex-direction: column; justify-content: space-between;
+    transition: background .3s ease;
+  }
+  .cell:hover { background: var(--cream); }
+  .cell .num { margin-bottom: auto; }
+  .cell h3 { margin-top: 40px; }
+  .cell p { margin-top: 12px; font-size: 15px; }
+
+  /* ============================================================
+     03 — Дом (галерея)
+     ============================================================ */
+  .gallery { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-top: 56px; }
+  .gallery > * { grid-column: span 6; }
+  @media (min-width: 760px) {
+    .g-a { grid-column: span 4; } .g-b { grid-column: span 2; }
+    .g-c { grid-column: span 2; } .g-d { grid-column: span 2; } .g-e { grid-column: span 2; }
+    .g-f { grid-column: span 3; } .g-g { grid-column: span 3; }
+  }
+
+  /* ============================================================
+     04 — Доверие / медиа
+     ============================================================ */
+  .band--dark { background: var(--forest); color: var(--cream); }
+  .band--dark h2, .band--dark h3 { color: var(--cream); }
+  .band--dark p { color: #CBD3C4; }
+  .band--dark .kicker { color: #C7B98F; } .band--dark .kicker::before { background: #C7B98F; }
+  .band--dark .rule { background: rgba(255,255,255,.14); }
+  .media { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 44px; }
+  .media a {
+    font-family: var(--serif); font-size: 20px; font-weight: 500;
+    padding: 14px 22px; border: 1px solid rgba(255,255,255,.2); border-radius: 2px;
+    color: var(--cream); transition: .25s; display: inline-flex; align-items: center; gap: 10px;
+  }
+  .media a:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.5); }
+  .media a small { font-family: var(--sans); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #B7C0AE; }
+
+  /* ============================================================
+     05 — Ягодное ядро (datalist)
+     ============================================================ */
+  .facts-list { border-top: 1px solid var(--ink-soft); margin-top: 12px; }
+  .facts-list div { display: flex; justify-content: space-between; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--ink-soft); }
+  .facts-list dt { color: var(--muted); font-size: 15px; }
+  .facts-list dd { font-family: var(--serif); font-size: 21px; text-align: right; }
+  .note {
+    margin-top: 26px; padding: 18px 22px; background: var(--paper-deep);
+    border-left: 2px solid var(--bronze); font-size: 14.5px; color: var(--ink);
+  }
+  .note b { font-weight: 600; }
+
+  /* ============================================================
+     06 — Сценарии (крупные карточки)
+     ============================================================ */
+  .scenarios { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 56px; }
+  @media (min-width: 820px) { .scenarios { grid-template-columns: 1fr 1fr; } }
+  .scn {
+    position: relative; overflow: hidden; border: 1px solid var(--ink-soft);
+    background: var(--cream); padding: clamp(28px, 3vw, 44px);
+    min-height: 320px; display: flex; flex-direction: column;
+    transition: transform .35s ease, box-shadow .35s ease;
+  }
+  .scn:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .scn__no { font-family: var(--serif); font-size: 54px; color: rgba(122,90,60,.24); line-height: 1; }
+  .scn h3 { margin-top: 18px; }
+  .scn p { margin-top: 14px; font-size: 15.5px; }
+  .scn__tag { margin-top: auto; padding-top: 22px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--bronze-dk); font-weight: 600; }
+
+  /* ============================================================
+     07 — Территория (схема)
+     ============================================================ */
+  .scheme-fig { margin-top: 52px; border: 1px solid var(--ink-soft); background: var(--cream); box-shadow: var(--shadow-md); }
+  .scheme-fig img { width: 100%; }
+  .scheme-fig figcaption { padding: 16px 22px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--ink-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+  .chip { font-size: 13px; padding: 8px 16px; border: 1px solid var(--ink-soft); border-radius: 100px; color: var(--ink); background: var(--cream); }
+  .chip--future { color: var(--bronze-dk); border-style: dashed; border-color: rgba(154,122,69,.5); }
+
+  /* ============================================================
+     08 — Локация
+     ============================================================ */
+  .loc { display: grid; grid-template-columns: 1fr; gap: clamp(32px, 4vw, 64px); align-items: center; }
+  @media (min-width: 900px) { .loc { grid-template-columns: 1fr 1fr; } }
+  .loc-fig { border: 1px solid var(--ink-soft); overflow: hidden; box-shadow: var(--shadow-sm); background: var(--paper-deep); }
+  .loc-fig img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+  .loc-fig figcaption { font-size: 12px; color: var(--muted); padding: 12px 16px; border-top: 1px solid var(--ink-soft); }
+  .dist { margin-top: 8px; }
+  .dist div { display: flex; align-items: baseline; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--ink-soft); }
+  .dist b { font-family: var(--serif); font-size: 24px; min-width: 96px; }
+  .dist span { color: var(--muted); font-size: 15px; }
+
+  /* ============================================================
+     09 — Инвест-логика
+     ============================================================ */
+  .cards6.invest .cell { min-height: 190px; }
+
+  /* ============================================================
+     10 / 11 / 12
+     ============================================================ */
+  .cad { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 40px; }
+  @media (min-width: 640px) { .cad { grid-template-columns: 1fr 1fr; } }
+  .cad div { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 22px; border: 1px solid rgba(255,255,255,.18); border-radius: 2px; }
+  .cad small { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #B7C0AE; }
+  .cad b { font-family: var(--mono); font-size: 15px; letter-spacing: .03em; color: var(--cream); font-weight: 500; }
+
+  .risks { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 44px; }
+  @media (min-width: 760px) { .risks { grid-template-columns: 1fr 1fr; } }
+  .risk { display: flex; gap: 16px; padding: 22px; background: var(--cream); border: 1px solid var(--ink-soft); }
+  .risk i { font-family: var(--serif); font-style: italic; color: var(--berry); font-size: 22px; line-height: 1; }
+  .risk p { font-size: 15px; color: var(--ink); }
+
+  /* ============================================================
+     13 — Финальный CTA + форма
+     ============================================================ */
+  .cta { background: var(--forest); color: var(--cream); }
+  .cta-grid { display: grid; grid-template-columns: 1fr; gap: clamp(36px, 5vw, 72px); }
+  @media (min-width: 940px) { .cta-grid { grid-template-columns: .9fr 1.1fr; } }
+  .cta h2 { color: var(--cream); }
+  .cta p { color: #CBD3C4; }
+  .cta ul { list-style: none; margin-top: 30px; display: grid; gap: 14px; }
+  .cta ul li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: #DDE3D6; }
+  .cta ul li::before { content: "—"; color: var(--bronze); }
+
+  form.lead-form { background: var(--cream); color: var(--ink); padding: clamp(26px, 3.5vw, 46px); border-radius: 3px; box-shadow: var(--shadow-md); }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 12.5px; font-weight: 600; letter-spacing: .04em; margin-bottom: 8px; color: var(--ink); }
+  .field label .req { color: var(--berry); }
+  .field input, .field select, .field textarea {
+    width: 100%; font-family: var(--sans); font-size: 15.5px; color: var(--ink);
+    padding: 13px 15px; background: var(--paper); border: 1px solid var(--ink-soft); border-radius: 2px;
+    transition: border-color .2s, background .2s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--bronze); background: #fff; }
+  .field textarea { resize: vertical; min-height: 92px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 520px) { .grid2 { grid-template-columns: 1fr; } }
+  .hp { position: absolute; left: -9999px; opacity: 0; height: 0; }
+  .consent { font-size: 12px; color: var(--muted); margin-top: 6px; display: flex; gap: 8px; align-items: flex-start; }
+  .consent input { width: auto; margin-top: 3px; }
+  .form-msg { display: none; padding: 16px; border-radius: 2px; font-size: 14.5px; margin-bottom: 18px; }
+  .form-msg.ok { display: block; background: #E7EDE2; color: var(--forest); border: 1px solid #C4D2BA; }
+  .form-msg.err { display: block; background: #F3E3E3; color: var(--berry); border: 1px solid #E3C7C7; }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer { background: #1B1813; color: #A79F90; padding-block: 56px; font-size: 13.5px; }
+  footer .wrap { display: grid; gap: 28px; }
+  @media (min-width: 760px) { footer .wrap { grid-template-columns: 1.4fr 1fr; align-items: end; } }
+  footer .brand b { color: var(--cream); }
+  footer .brand span { color: #8A8272; }
+  .disclaimer { font-size: 12px; line-height: 1.7; color: #837B6C; max-width: 70ch; }
+  footer a.f-lnk { color: #CFC7B4; border-bottom: 1px solid rgba(207,199,180,.3); }
+
+  /* ---------- Reveal animation ----------
+     Прячем элементы ТОЛЬКО когда JS активен (html.js). Без JS контент виден сразу —
+     это защищает от «пустой страницы» в iOS Quick Look / при открытии файла без JS. */
+  .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.2,.6,.2,1), transform .7s cubic-bezier(.2,.6,.2,1); }
+  .js .reveal.in { opacity: 1; transform: none; }
+  .reveal.d1 { transition-delay: .08s; } .reveal.d2 { transition-delay: .16s; } .reveal.d3 { transition-delay: .24s; }
+  @media (prefers-reduced-motion: reduce) { .js .reveal { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header id="top">
+  <div class="wrap bar">
+    <a href="#top" class="brand">
+      <b>Поседкино</b>
+      <span>Фермерская усадьба</span>
+    </a>
+    <nav class="main" id="nav">
+      <a class="lnk" href="#base">Объект</a>
+      <a class="lnk" href="#scenarios">Сценарии</a>
+      <a class="lnk" href="#territory">Территория</a>
+      <a class="lnk" href="#invest">Инвестору</a>
+      <a class="lnk" href="#docs">Документы</a>
+      <a class="btn btn--bronze" href="#request">Инвест-мемо</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== 01 · HERO ===================== -->
+<section class="hero" id="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__grain"></div>
+  <div class="wrap">
+    <span class="kicker reveal">Мытищинский округ · Поседкино · закрытое предложение</span>
+    <h1 class="reveal d1">Фермерская усадьба с действующим ягодным ядром и <em>потенциалом круглогодичного</em> загородного проекта</h1>
+    <p class="hero__sub reveal d2">Большой деревянный дом, земля, клубничные посадки, хозяйственная инфраструктура и природное окружение у леса — основа для частной усадьбы, агротуризма, камерных событий и фермерского бренда.</p>
+    <div class="hero__cta reveal d2">
+      <a href="#request" class="btn btn--bronze btn--lg">Получить инвест-мемо <span class="arw">→</span></a>
+      <a href="#request" class="btn btn--ghost btn--lg">Назначить просмотр</a>
+    </div>
+    <div class="hero__facts reveal d3">
+      <div><b>~5 га</b><span>земельный массив</span></div>
+      <div><b>~300 м²</b><span>деревянный дом</span></div>
+      <div><b>~2 га</b><span>клубничные посадки</span></div>
+      <div><b>4</b><span>сценария развития</span></div>
+    </div>
+  </div>
+  <div class="scrollcue"><i></i> листайте</div>
+</section>
+
+<!-- ===================== 02 · ГОТОВАЯ БАЗА ===================== -->
+<section class="band" id="base">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">01 — Не объект недвижимости, а база</span>
+      <h2>Здесь уже есть то, что обычно приходится создавать с нуля</h2>
+      <p>У объекта есть не только земля и дом. Здесь сформирована фермерская история, действующее ягодное направление, хозяйственные постройки, производственные сценарии и узнаваемость через «Клубничный хутор» и прошлый опыт брендов «Доброе поле» / «Фермерский сок».</p>
+    </div>
+
+    <div class="cards6">
+      <div class="cell reveal"><span class="num">01</span><div><h3>Земля и природа</h3><p>Массив около 5 га у леса, тупиковая локация, ощущение уединения.</p></div></div>
+      <div class="cell reveal d1"><span class="num">02</span><div><h3>Деревянный дом</h3><p>Большой сруб около 300 м² с высокой гостиной и террасой.</p></div></div>
+      <div class="cell reveal d2"><span class="num">03</span><div><h3>Клубничные посадки</h3><p>Около 2 га действующей плантации, понятная агротехнология.</p></div></div>
+      <div class="cell reveal"><span class="num">04</span><div><h3>Инфраструктура</h3><p>Склад ~240 м², производственное здание ~384 м², хозпостройки.</p></div></div>
+      <div class="cell reveal d1"><span class="num">05</span><div><h3>Существующий спрос</h3><p>Ягода продаётся без полноценного маркетинга — сарафан и постоянные клиенты.</p></div></div>
+      <div class="cell reveal d2"><span class="num">06</span><div><h3>Круглогодичность</h3><p>Потенциал монетизации вне ягодного сезона — туризм, события, продукты.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ===================== 03 · ДОМ ===================== -->
+<section class="band" id="house">
+  <div class="wrap">
+    <div class="split split--41">
+      <div class="sec-head reveal">
+        <span class="kicker">02 — Сердце усадьбы</span>
+        <h2>Дом, который уже создаёт атмосферу проекта</h2>
+        <p class="lead" style="margin-top:22px">Большой одноэтажный сруб с высокой гостиной, мощными деревянными балками, печью, террасой и видом на зелёную территорию.</p>
+        <p>Главный дом — не просто жилая функция. Это центр будущей усадьбы: место для закрытых ужинов, встреч инвесторов, семейных выходных, камерных мероприятий, ретритов и приёма гостей.</p>
+      </div>
+      <div class="shot shot--tall reveal d1">
+        <div class="shot__in">
+          <div class="shot__lbl">Фото · доснять</div>
+          <div class="shot__txt">«Длинный фасад дома на фоне луга»</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery">
+      <div class="shot g-a reveal"><div class="shot__in"><div class="shot__lbl">Фото · доснять</div><div class="shot__txt">«Дом на закате»</div></div></div>
+      <div class="shot g-b reveal d1"><div class="shot__in"><div class="shot__lbl">Фото</div><div class="shot__txt">«Живое дерево»</div></div></div>
+      <div class="shot g-c reveal"><div class="shot__in"><div class="shot__lbl">Фото</div><div class="shot__txt">«Пространство и свет»</div></div></div>
+      <div class="shot g-d reveal d1"><div class="shot__in"><div class="shot__lbl">Фото</div><div class="shot__txt">«Печь с огнём»</div></div></div>
+      <div class="shot g-e reveal d2"><div class="shot__in"><div class="shot__lbl">Фото</div><div class="shot__txt">«Вид на лес и поле»</div></div></div>
+      <div class="shot g-f reveal"><div class="shot__in"><div class="shot__lbl">Фото · доснять</div><div class="shot__txt">«Терраса с длинным столом»</div></div></div>
+      <div class="shot g-g reveal d1"><div class="shot__in"><div class="shot__lbl">Фото · доснять</div><div class="shot__txt">«Балки и высокий потолок»</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 · ДОВЕРИЕ / МЕДИА ===================== -->
+<section class="band band--dark" id="trust">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">03 — Реальная фермерская история</span>
+      <h2>Проект с историей, а не случайный дачный участок</h2>
+      <p>С объектом связаны фермерские бренды и публичные упоминания: КФХ «Доброе поле», «Фермерский сок», «Клубничный хутор». Ранее хозяйство фигурировало в медиа и поставочных историях, связанных с натуральной фермерской продукцией — в том числе с премиальным ритейлом.</p>
+    </div>
+    <div class="media reveal d1">
+      <a href="https://www.fermsok.ru/" target="_blank" rel="noopener">Фермерский сок <small>fermsok.ru ↗</small></a>
+      <a href="https://www.eco-lakomka.ru/farmers/41" target="_blank" rel="noopener">Эко-Лакомка <small>КФХ «Доброе Поле» ↗</small></a>
+      <a href="https://av.ru/lp/farm/farmer/Yaroslavzvyagin/" target="_blank" rel="noopener">Азбука вкуса <small>фермер ↗</small></a>
+      <a href="https://abnews.ru/news/mosreg/2022/12/15/fermerskoe-hozyajstvo-dobroe-pole-iz-mytishh-proizvelo-150-tonn-soka-i-100-tonn-morsa" target="_blank" rel="noopener">АБН <small>150 т сока, 100 т морса ↗</small></a>
+      <a href="https://yandex.ru/maps/" target="_blank" rel="noopener">Яндекс Карты <small>«Клубничный хутор» ↗</small></a>
+    </div>
+    <p style="margin-top:34px;font-size:13.5px;color:#9FA893;max-width:60ch">Медиа-история и первоисточники — доверительный актив объекта. Полный дайджест публикаций и материалов входит в закрытый инвест-пакет.</p>
+  </div>
+</section>
+
+<!-- ===================== 05 · ЯГОДНОЕ ЯДРО ===================== -->
+<section class="band" id="berry">
+  <div class="wrap">
+    <div class="split split--41">
+      <div class="sec-head reveal">
+        <span class="kicker">04 — Действующий якорь</span>
+        <h2>Клубника — не просто выручка, а повод приехать</h2>
+        <p>Ягодное направление уже привлекает людей на территорию и может стать входной точкой для агротуризма: самосбор, фестивали, фермерские наборы, семейные выходные и корпоративные программы.</p>
+        <div class="note reveal d1">
+          <b>Финансовая модель и подтверждающие данные — по запросу.</b><br>
+          Цифры ниже указаны как ориентиры со слов собственника и требуют проверки при due diligence.
+        </div>
+      </div>
+      <div class="reveal d1">
+        <dl class="facts-list">
+          <div><dt>Клубничные посадки</dt><dd>~2 га</dd></div>
+          <div><dt>Потенциал расширения</dt><dd>+1 га</dd></div>
+          <div><dt>Сезон</dt><dd>~20 июня — 20 июля</dd></div>
+          <div><dt>Основные сорта</dt><dd>Полька · Мальвина</dd></div>
+          <div><dt>Цена лукошка 1,5 кг</dt><dd>~1000 ₽</dd></div>
+          <div><dt>Пиковые продажи</dt><dd>до 600 кг / выходные</dd></div>
+          <div><dt>Клубникой занимаются</dt><dd>с 2022 года</dd></div>
+          <div><dt>Срок владения</dt><dd>с 2015 года</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ===================== 06 · СЦЕНАРИИ ===================== -->
+<section class="band" id="scenarios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">05 — Мультисценарность</span>
+      <h2>Один актив — несколько сценариев роста</h2>
+      <p>Клубника — это месяц активного cashflow. Сила объекта в том, что вокруг ягодного якоря можно выстроить круглогодичную модель с высокой добавленной стоимостью.</p>
+    </div>
+    <div class="scenarios">
+      <div class="scn reveal">
+        <div class="scn__no">01</div>
+        <h3>Ягода и самосбор</h3>
+        <p>Развитие клубничного направления, расширение сортов, самосбор, семейные выходные, фермерская лавка, ягодные фестивали.</p>
+        <div class="scn__tag">действующее направление</div>
+      </div>
+      <div class="scn reveal d1">
+        <div class="scn__no">02</div>
+        <h3>Агротуризм</h3>
+        <p>Гостевые домики и барнхаусы, баня, фермерские завтраки, лесные прогулки, зимняя лыжня, заимка, сезонные маршруты, фермерский магазин.</p>
+        <div class="scn__tag">потенциальный сценарий</div>
+      </div>
+      <div class="scn reveal">
+        <div class="scn__no">03</div>
+        <h3>Камерные мероприятия</h3>
+        <p>Закрытые ужины, корпоративы до 100 гостей, семейные праздники, бренд-ивенты, гастро-вечера, ретриты и бизнес-клубы. Не массовая площадка — усадьба «с историей».</p>
+        <div class="scn__tag">потенциальный сценарий</div>
+      </div>
+      <div class="scn reveal d1">
+        <div class="scn__no">04</div>
+        <h3>Фермерское производство</h3>
+        <p>Ягодные заготовки, соки, морсы, варенье, сушёные ягоды, подарочные наборы, фермерская переработка и гастрономический бренд.</p>
+        <div class="scn__tag">потенциальный сценарий</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 · ТЕРРИТОРИЯ ===================== -->
+<section class="band band--tight" id="territory" style="background:var(--paper-deep)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">06 — Территория и инфраструктура</span>
+      <h2>Массив, который можно развивать поэтапно</h2>
+      <p>Объект включает жилую, фермерскую и хозяйственную части: дом, поля, хозпостройки, склад и производственное здание, а также зоны для будущего гостевого сценария и камерных событий.</p>
+    </div>
+
+    <figure class="scheme-fig reveal d1">
+      <img src="assets/scheme.jpg" alt="Концептуальная схема участка: клубничное поле, основной дом, конюшня, баня, пруд, лес" loading="lazy" />
+      <figcaption>
+        <span>Концептуальная схема для презентации проекта</span>
+        <span style="color:var(--bronze-dk)">Не является кадастровым планом · зоны развития — потенциальный сценарий</span>
+      </figcaption>
+    </figure>
+
+    <div class="chips reveal d2">
+      <span class="chip">Клубничное поле</span>
+      <span class="chip">Основной дом</span>
+      <span class="chip">Здание-термос / продажи ягоды</span>
+      <span class="chip">Склад ~240 м²</span>
+      <span class="chip">Производственное здание ~384 м²</span>
+      <span class="chip">Конюшня</span>
+      <span class="chip">Курятник и тех. постройки</span>
+      <span class="chip">Парковка</span>
+      <span class="chip chip--future">Зона барнхаусов</span>
+      <span class="chip chip--future">Банная зона</span>
+      <span class="chip chip--future">Event-зона</span>
+      <span class="chip chip--future">Лесная тропа</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 08 · ЛОКАЦИЯ ===================== -->
+<section class="band" id="location">
+  <div class="wrap">
+    <div class="loc">
+      <figure class="loc-fig reveal">
+        <img src="assets/satellite.jpg" alt="Спутниковый снимок участка: клубничное поле, строения, лес" loading="lazy" />
+        <figcaption>Спутниковый вид: клубничное поле, строения и лесное окружение. Ширина поля ~60 м.</figcaption>
+      </figure>
+      <div class="reveal d1">
+        <span class="kicker">07 — Локация</span>
+        <h2 style="margin-top:20px">Загородная тишина рядом с московским спросом</h2>
+        <p style="margin-top:18px">Поседкино, Мытищинский округ. Локация сочетает уединение, природное окружение и близость к платёжеспособной аудитории Москвы и Подмосковья — важная основа для самосбора, камерного отдыха, частных событий и фермерского продукта.</p>
+        <div class="dist">
+          <div><b>~5 га</b><span>единый массив у леса, тупиковый подъезд</span></div>
+          <div><b>Москва</b><span>в пределах ближнего Подмосковья, Мытищинское направление</span></div>
+          <div><b>Лес</b><span>примыкание к лесу, опушка, отсутствие плотной застройки рядом</span></div>
+        </div>
+        <p class="note reveal d2" style="margin-top:26px">Природное и аграрное окружение формирует сильную основу для загородного проекта. Финальные градостроительные и правовые параметры предоставляются в закрытом пакете.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ===================== 09 · ИНВЕСТ-ЛОГИКА ===================== -->
+<section class="band" id="invest">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">08 — Инвестиционная логика</span>
+      <h2>Почему актив интересен инвестору</h2>
+    </div>
+    <div class="cards6 invest">
+      <div class="cell reveal"><span class="num">01</span><div><h3>Существующий спрос</h3><p>Клубничное направление уже генерирует поток покупателей.</p></div></div>
+      <div class="cell reveal d1"><span class="num">02</span><div><h3>Мультисценарность</h3><p>Объект можно развивать в нескольких направлениях сразу.</p></div></div>
+      <div class="cell reveal d2"><span class="num">03</span><div><h3>Готовая атмосфера</h3><p>Дом и территория уже имеют визуальную и эмоциональную ценность.</p></div></div>
+      <div class="cell reveal"><span class="num">04</span><div><h3>Фермерская история</h3><p>Прошлый бренд, медиа-след и публичные упоминания.</p></div></div>
+      <div class="cell reveal d1"><span class="num">05</span><div><h3>Рост через упаковку</h3><p>Отсутствие системного маркетинга — зона быстрого усиления.</p></div></div>
+      <div class="cell reveal d2"><span class="num">06</span><div><h3>Потенциал капитализации</h3><p>При грамотной упаковке — редкий загородный продукт, а не просто земля.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 10 · ФИНМОДЕЛЬ + 11 · ДОКУМЕНТЫ ===================== -->
+<section class="band band--dark" id="docs">
+  <div class="wrap">
+    <div class="split split--41">
+      <div class="reveal">
+        <span class="kicker">09 — Финансовая модель</span>
+        <h2 style="margin-top:20px">Подробная модель — после первичного контакта</h2>
+        <p style="margin-top:18px">По запросу предоставляется инвестиционный пакет: текущая сезонная экономика клубники, расходы на сборщиков, оценка потерь и погодных рисков, сценарии расширения, самосбора, бани и беседок, барнхаусов, камерных мероприятий, фермерской переработки — и перечень документов к проверке.</p>
+        <p style="margin-top:16px;font-size:13.5px;color:#9FA893">Цифры на лендинге указаны как ориентиры и сценарии. Подробная модель предоставляется после первичного контакта.</p>
+        <a href="#request" class="btn btn--bronze btn--lg" style="margin-top:28px">Запросить закрытый пакет <span class="arw">→</span></a>
+      </div>
+      <div class="reveal d1">
+        <span class="kicker">10 — Документы и параметры</span>
+        <h3 style="margin-top:18px;color:var(--cream)">Кадастровые номера</h3>
+        <p style="margin-top:12px;font-size:14.5px">Базовые сведения для проверки. Выписки ЕГРН, ВРИ, ПЗЗ, градостроительные ограничения и сценарии допустимого использования — по запросу заинтересованным сторонам.</p>
+        <div class="cad">
+          <div><small>Здание</small><b>50:12:0010306:537</b></div>
+          <div><small>Участок</small><b>50:12:0010306:159</b></div>
+          <div><small>Участок</small><b>50:12:0010306:518</b></div>
+          <div><small>Участок</small><b>50:12:0010306:189</b></div>
+        </div>
+        <p style="margin-top:16px;font-size:12px;color:#837B6C">Отсутствие обременений, точный ВРИ, площади и объём допустимого строительства подтверждаются актуальной выпиской ЕГРН и градостроительной проверкой.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 12 · РИСКИ ===================== -->
+<section class="band" id="risks">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">11 — Взрослый подход</span>
+      <h2>Что важно учитывать</h2>
+      <p>Потенциал объекта раскрывается не пассивным владением, а через грамотного оператора. Мы показываем риски открыто — это часть честной инвестиционной логики.</p>
+    </div>
+    <div class="risks">
+      <div class="risk reveal"><i>01</i><p>Сезонность клубники — активный денежный поток около месяца.</p></div>
+      <div class="risk reveal d1"><i>02</i><p>Погодные и аграрные риски: заморозки, град, вредители.</p></div>
+      <div class="risk reveal"><i>03</i><p>Нужно агрономическое сопровождение направления.</p></div>
+      <div class="risk reveal d1"><i>04</i><p>Обязательна проверка ВРИ, границ и градостроительных ограничений.</p></div>
+      <div class="risk reveal"><i>05</i><p>Доходность зависит от оператора, а не от пассивной модели.</p></div>
+      <div class="risk reveal d1"><i>06</i><p>Для туризма и событий потребуется маркетинг и сервис.</p></div>
+    </div>
+    <p class="note reveal" style="margin-top:34px;max-width:70ch">
+      <b>Проект подходит не пассивному покупателю, а владельцу или инвестору, который понимает ценность операционного развития.</b>
+    </p>
+  </div>
+</section>
+
+<!-- ===================== 13 · ФИНАЛЬНЫЙ CTA + ФОРМА ===================== -->
+<section class="band cta" id="request">
+  <div class="wrap">
+    <div class="cta-grid">
+      <div class="reveal">
+        <span class="kicker">12 — Закрытый пакет по объекту</span>
+        <h2 style="margin-top:20px">Оставьте контакт — вышлем инвестиционное описание</h2>
+        <p style="margin-top:18px">В ответ вы получаете инвест-мемо, фото- и видеоматериалы, кадастровые данные, базовую финансовую модель и договорённость о просмотре.</p>
+        <ul>
+          <li>Инвестиционное описание объекта и сценариев</li>
+          <li>Фото / видео и концептуальная схема территории</li>
+          <li>Кадастровые данные и перечень документов к due diligence</li>
+          <li>Базовая финансовая модель ягодного направления</li>
+          <li>Организация просмотра — авто или водный подход</li>
+        </ul>
+      </div>
+
+      <form class="lead-form reveal d1" id="leadForm" novalidate>
+        <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+
+        <div class="field">
+          <label for="name">Имя <span class="req">*</span></label>
+          <input type="text" id="name" name="name" autocomplete="name" required />
+        </div>
+
+        <div class="grid2">
+          <div class="field">
+            <label for="phone">Телефон <span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+7 ___ ___-__-__" required />
+          </div>
+          <div class="field">
+            <label for="messenger">Telegram / WhatsApp</label>
+            <input type="text" id="messenger" name="messenger" placeholder="@username" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="you@mail.ru" />
+        </div>
+
+        <div class="field">
+          <label for="interest">Интерес <span class="req">*</span></label>
+          <select id="interest" name="interest" required>
+            <option value="" disabled selected>Выберите вариант</option>
+            <option>Покупка</option>
+            <option>Инвестиции</option>
+            <option>Партнёрство</option>
+            <option>Операторское управление</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="comment">Комментарий</label>
+          <textarea id="comment" name="comment" placeholder="Коротко о вашей задаче или вопросе"></textarea>
+        </div>
+
+        <!-- honeypot -->
+        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <label class="consent">
+          <input type="checkbox" id="consent" required />
+          <span>Согласен на обработку персональных данных для обратной связи по объекту.</span>
+        </label>
+
+        <button type="submit" class="btn btn--bronze btn--lg" style="width:100%;margin-top:20px">Запросить материалы <span class="arw">→</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <b style="font-family:var(--serif);font-size:24px">Фермерская усадьба · Поседкино</b>
+      <span style="display:block;margin-top:8px;letter-spacing:.22em;text-transform:uppercase;font-size:11px">Мытищинский округ · закрытое инвестиционное предложение</span>
+      <p class="disclaimer" style="margin-top:22px">
+        Материалы носят информационный характер и не являются публичной офертой. Площади, границы, состав строений,
+        назначение земли (ВРИ) и допустимые сценарии использования требуют подтверждения актуальной выпиской ЕГРН и
+        градостроительной проверкой. Финансовые показатели указаны со слов собственника как ориентиры и подлежат проверке
+        при due diligence. Изображения включают концептуальную схему и материалы для презентации.
+      </p>
+    </div>
+    <div style="text-align:left">
+      <a class="f-lnk" href="#request">Запросить инвест-мемо</a><br><br>
+      <a class="f-lnk" href="#top">Наверх ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- Sticky header ----
+  const header = document.getElementById('top');
+  const onScroll = () => header.classList.toggle('stuck', window.scrollY > 40);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ---- Mobile nav ----
+  const nav = document.getElementById('nav');
+  const toggle = document.getElementById('navToggle');
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    header.classList.toggle('nav-open');
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open'); header.classList.remove('nav-open');
+  }));
+
+  // ---- Reveal on scroll (с защитой: если IO нет — показываем всё сразу) ----
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => io.observe(el));
+    // страховка: если что-то не проявилось за 3с — показать принудительно
+    setTimeout(() => reveals.forEach(el => el.classList.add('in')), 3000);
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
+
+  // ---- Form (клиентская валидация + graceful success) ----
+  // ВНИМАНИЕ: сейчас форма НЕ отправляет данные на сервер.
+  // Подключить один из вариантов: Formspree / Telegram Bot API / свой endpoint / Resend.
+  const form = document.getElementById('leadForm');
+  const msg = document.getElementById('formMsg');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    msg.className = 'form-msg';
+    if (form.company.value) return; // honeypot — бот
+    const req = ['name', 'phone', 'interest'];
+    const bad = req.find(n => !form[n].value.trim());
+    if (bad || !form.consent.checked) {
+      msg.textContent = 'Пожалуйста, заполните имя, телефон, интерес и подтвердите согласие.';
+      msg.classList.add('err');
+      (form[bad] || form.consent).focus();
+      return;
+    }
+    // TODO: заменить на реальную отправку (fetch к endpoint / Telegram / Formspree)
+    msg.textContent = 'Спасибо! Заявка принята. Мы свяжемся с вами и вышлем закрытый пакет по объекту.';
+    msg.classList.add('ok');
+    form.reset();
+    msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+</script>
+</body>
+</html>
