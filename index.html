@@ -949,12 +949,17 @@
     reveals.forEach(el => el.classList.add('in'));
   }
 
-  // ---- Form (клиентская валидация + graceful success) ----
-  // ВНИМАНИЕ: сейчас форма НЕ отправляет данные на сервер.
-  // Подключить один из вариантов: Formspree / Telegram Bot API / свой endpoint / Resend.
+  // ---- Форма → Google Sheets ----
+  // НАСТРОЙКА: вставь сюда URL веб-приложения из Google Apps Script.
+  // Пошагово — в файле google-apps-script.gs и в README.md.
+  // Пока строка не заменена, форма работает в демо-режиме (показывает «спасибо», но никуда не шлёт).
+  const SHEETS_ENDPOINT = "ВСТАВЬ_СЮДА_URL_GOOGLE_APPS_SCRIPT";
+
   const form = document.getElementById('leadForm');
   const msg = document.getElementById('formMsg');
-  form.addEventListener('submit', (e) => {
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     msg.className = 'form-msg';
     if (form.company.value) return; // honeypot — бот
@@ -966,11 +971,41 @@
       (form[bad] || form.consent).focus();
       return;
     }
-    // TODO: заменить на реальную отправку (fetch к endpoint / Telegram / Formspree)
-    msg.textContent = 'Спасибо! Заявка принята. Мы свяжемся с вами и вышлем закрытый пакет по объекту.';
-    msg.classList.add('ok');
-    form.reset();
-    msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    const data = {
+      name: form.name.value.trim(),
+      phone: form.phone.value.trim(),
+      messenger: form.messenger.value.trim(),
+      email: form.email.value.trim(),
+      interest: form.interest.value,
+      comment: form.comment.value.trim(),
+      page: location.href
+    };
+
+    const configured = SHEETS_ENDPOINT && !SHEETS_ENDPOINT.includes('ВСТАВЬ');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправляем…';
+    try {
+      if (configured) {
+        // text/plain + no-cors — чтобы Apps Script принял POST без CORS-преград.
+        await fetch(SHEETS_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(data)
+        });
+      }
+      msg.textContent = 'Спасибо! Заявка принята. Мы свяжемся с вами и вышлем закрытый пакет по объекту.';
+      msg.classList.add('ok');
+      form.reset();
+      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (err) {
+      msg.textContent = 'Не удалось отправить заявку. Проверьте соединение или напишите нам напрямую.';
+      msg.classList.add('err');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Запросить материалы <span class="arw">→</span>';
+    }
   });
 </script>
 </body>
