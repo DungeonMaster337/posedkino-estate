@@ -162,11 +162,14 @@
 
   @media (max-width: 900px) {
     nav.main {
-      position: fixed; inset: 0 0 0 auto; width: min(80vw, 340px);
+      /* top/right + явная высота 100dvh — панель во весь экран даже когда
+         backdrop-filter шапки делает её containing block для fixed-потомков */
+      position: fixed; top: 0; right: 0; left: auto;
+      width: min(80vw, 340px); height: 100vh; height: 100dvh;
       background: var(--cream); flex-direction: column; align-items: flex-start;
       justify-content: center; gap: 26px; padding: 40px;
       transform: translateX(100%); transition: transform .4s cubic-bezier(.7,0,.2,1);
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-md); z-index: 55;
     }
     nav.main.open { transform: translateX(0); }
     nav.main a.lnk { font-size: 18px; color: var(--ink); opacity: .9; } /* панель молочная → тёмный текст */
