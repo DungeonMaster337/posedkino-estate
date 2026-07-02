@@ -25,6 +25,9 @@
  * ──────────────────────────────────────────────────────────────────────────
  */
 
+// Куда слать уведомление о каждой новой заявке:
+const NOTIFY_EMAIL = 'sengokyy@gmail.com';
+
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.tryLock(10000);
@@ -46,11 +49,22 @@ function doPost(e) {
       d.page || ''
     ]);
 
-    // (необязательно) дублировать заявку на почту — раскомментируй и впиши адрес:
-    // MailApp.sendEmail('you@mail.ru', 'Новая заявка с лендинга Поседкино',
-    //   'Имя: ' + (d.name||'') + '\nТелефон: ' + (d.phone||'') +
-    //   '\nМессенджер: ' + (d.messenger||'') + '\nEmail: ' + (d.email||'') +
-    //   '\nИнтерес: ' + (d.interest||'') + '\nКомментарий: ' + (d.comment||''));
+    // Уведомление о новой заявке на почту (не роняем запись в таблицу, если почта сбойнёт)
+    try {
+      var body =
+        'Новая заявка с лендинга «Поседкино»\n\n' +
+        'Имя: ' + (d.name || '') + '\n' +
+        'Телефон: ' + (d.phone || '') + '\n' +
+        'Telegram/WhatsApp: ' + (d.messenger || '') + '\n' +
+        'E-mail: ' + (d.email || '') + '\n' +
+        'Интерес: ' + (d.interest || '') + '\n' +
+        'Комментарий: ' + (d.comment || '') + '\n\n' +
+        'Страница: ' + (d.page || '') + '\n' +
+        'Время: ' + new Date();
+      var options = { name: 'Лендинг Поседкино' };
+      if (d.email && d.email.indexOf('@') > -1) options.replyTo = d.email; // ответить сразу заявителю
+      MailApp.sendEmail(NOTIFY_EMAIL, 'Заявка: ' + (d.name || '—') + ' · ' + (d.interest || ''), body, options);
+    } catch (mailErr) { /* игнорируем ошибку почты */ }
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
