@@ -191,16 +191,15 @@
     color: var(--cream);
     overflow: hidden;
   }
-  /* фон = фото-слот: живой природный тон вместо фейкового здания */
+  /* фон = реальное фото усадьбы + затемнение для читаемости текста */
   .hero__bg {
     position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(120% 90% at 70% 15%, rgba(120,140,95,.35), transparent 55%),
-      linear-gradient(180deg, #3b4632 0%, #2c3626 42%, #20281d 100%);
+    background: #20281d url("assets/hero.jpg") center 38% / cover no-repeat;
   }
-  .hero__bg::after {  /* тонкая текстура-опушка снизу */
+  .hero__bg::after {  /* градиент-затемнение: сильнее снизу под текстом */
     content: ""; position: absolute; inset: 0;
-    background: linear-gradient(0deg, rgba(20,26,17,.82) 0%, rgba(20,26,17,.15) 45%, rgba(20,26,17,.35) 100%);
+    background:
+      linear-gradient(0deg, rgba(18,24,15,.90) 0%, rgba(18,24,15,.40) 42%, rgba(18,24,15,.30) 72%, rgba(18,24,15,.50) 100%);
   }
   .hero__grain { position: absolute; inset: 0; z-index: 1; opacity: .06; mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
@@ -274,8 +273,9 @@
   /* ============================================================
      03 — Дом (галерея)
      ============================================================ */
-  .gallery { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-top: 56px; }
+  .gallery { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-top: 56px; grid-auto-rows: clamp(200px, 23vw, 320px); }
   .gallery > * { grid-column: span 6; }
+  .gallery .shot { aspect-ratio: auto; height: 100%; }
   @media (min-width: 760px) {
     .g-a { grid-column: span 4; } .g-b { grid-column: span 2; }
     .g-c { grid-column: span 2; } .g-d { grid-column: span 2; } .g-e { grid-column: span 2; }
@@ -311,6 +311,11 @@
     border-left: 2px solid var(--bronze); font-size: 14.5px; color: var(--ink);
   }
   .note b { font-weight: 600; }
+  .berry-media { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 44px; }
+  @media (min-width: 720px) { .berry-media { grid-template-columns: 1.35fr 1fr; } }
+  .berry-media figure { border: 1px solid var(--ink-soft); background: var(--cream); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .berry-media img { width: 100%; height: clamp(240px, 34vw, 420px); object-fit: cover; }
+  .berry-media figcaption { padding: 14px 18px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--ink-soft); }
 
   /* ============================================================
      06 — Сценарии (крупные карточки)
@@ -328,6 +333,18 @@
   .scn h3 { margin-top: 18px; }
   .scn p { margin-top: 14px; font-size: 15.5px; }
   .scn__tag { margin-top: auto; padding-top: 22px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--bronze-dk); font-weight: 600; }
+  .scn__top { display: flex; align-items: center; justify-content: space-between; }
+  .scn__ic svg { width: 38px; height: 38px; stroke: var(--bronze); fill: none; opacity: .9; }
+
+  /* ============================================================
+     Полноширинный визуальный баннер (showcase)
+     ============================================================ */
+  .showcase { position: relative; min-height: clamp(360px, 58vh, 620px); display: flex; align-items: flex-end; background: #20281d center/cover no-repeat; color: var(--cream); overflow: hidden; }
+  .showcase::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(18,24,15,.85) 0%, rgba(18,24,15,.10) 55%, rgba(18,24,15,.25) 100%); }
+  .showcase__cap { position: relative; z-index: 1; max-width: var(--wrap); margin: 0 auto; width: 100%; padding: 0 var(--gutter) clamp(38px, 6vh, 70px); }
+  .showcase__cap .kicker { color: #E4D9BE; } .showcase__cap .kicker::before { background: #E4D9BE; }
+  .showcase__cap h3 { color: var(--cream); font-size: clamp(24px, 3.4vw, 46px); max-width: 20ch; margin-top: 16px; line-height: 1.08; }
+  .showcase--banya { background-image: url("assets/banya-pond.jpg"); }
 
   /* ============================================================
      07 — Территория (схема)
@@ -501,22 +518,16 @@
         <p class="lead" style="margin-top:22px">Большой одноэтажный сруб с высокой гостиной, мощными деревянными балками, печью, террасой и видом на зелёную территорию.</p>
         <p>Главный дом — не просто жилая функция. Это центр будущей усадьбы: место для закрытых ужинов, встреч инвесторов, семейных выходных, камерных мероприятий, ретритов и приёма гостей.</p>
       </div>
-      <div class="shot shot--tall reveal d1">
-        <div class="shot__in">
-          <div class="shot__lbl">Фото · доснять</div>
-          <div class="shot__txt">«Длинный фасад дома на фоне луга»</div>
-        </div>
-      </div>
+      <figure class="shot shot--tall reveal d1">
+        <img src="assets/house-facade.jpg" alt="Фасад деревянного дома с большим окном и террасой на фоне луга и леса" loading="lazy" />
+      </figure>
     </div>
 
     <div class="gallery">
-      <div class="shot g-a reveal"><div class="shot__in"><div class="shot__lbl">Фото · доснять</div><div class="shot__txt">«Дом на закате»</div></div></div>
-      <div class="shot g-b reveal d1"><div class="shot__in"><div class="shot__lbl">Фото</div><div class="shot__txt">«Живое дерево»</div></div></div>
-      <div class="shot g-c reveal"><div class="shot__in"><div class="shot__lbl">Фото</div><div class="shot__txt">«Пространство и свет»</div></div></div>
-      <div class="shot g-d reveal d1"><div class="shot__in"><div class="shot__lbl">Фото</div><div class="shot__txt">«Печь с огнём»</div></div></div>
-      <div class="shot g-e reveal d2"><div class="shot__in"><div class="shot__lbl">Фото</div><div class="shot__txt">«Вид на лес и поле»</div></div></div>
-      <div class="shot g-f reveal"><div class="shot__in"><div class="shot__lbl">Фото · доснять</div><div class="shot__txt">«Терраса с длинным столом»</div></div></div>
-      <div class="shot g-g reveal d1"><div class="shot__in"><div class="shot__lbl">Фото · доснять</div><div class="shot__txt">«Балки и высокий потолок»</div></div></div>
+      <figure class="shot g-a reveal"><img src="assets/house-living.jpg" alt="Высокая гостиная с деревянными балками, каминной люстрой-колесом и панорамными окнами" loading="lazy" /></figure>
+      <figure class="shot g-b reveal d1"><img src="assets/house-window.jpg" alt="Вид из окна дома на зелёный луг и лес" loading="lazy" /></figure>
+      <figure class="shot g-f reveal"><img src="assets/house-fireplace.jpg" alt="Большой общий зал с белой печью-камином, подвесными креслами и обеденной зоной" loading="lazy" /></figure>
+      <figure class="shot g-g reveal d1"><img src="assets/house-dining.jpg" alt="Обеденный зал с длинным столом и большими окнами в лес" loading="lazy" /></figure>
     </div>
   </div>
 </section>
@@ -566,6 +577,11 @@
         </dl>
       </div>
     </div>
+
+    <div class="berry-media">
+      <figure class="reveal"><img src="assets/berry-kiosk.jpg" alt="Действующая точка продаж «Клубничный хутор» с клубничной вывеской у поля" loading="lazy" /><figcaption>Действующая точка продаж «Клубничный хутор» прямо у поля</figcaption></figure>
+      <figure class="reveal d1"><img src="assets/field.jpg" alt="Клубничное поле хозяйства и рабочая техника" loading="lazy" /><figcaption>Поле и техника — работающее хозяйство, а не концепт</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -581,30 +597,50 @@
     </div>
     <div class="scenarios">
       <div class="scn reveal">
-        <div class="scn__no">01</div>
+        <div class="scn__top">
+          <span class="scn__ic"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-1.6-6.5-5-6.5-8.6C5.5 9 8.5 7 12 7s6.5 2 6.5 5.4C18.5 16 16 19.4 12 21Z"/><path d="M12 7c.2-2 1.7-3.4 4-3.9-.2 2-1.6 3.3-4 3.9Zm0 0c-.2-2-1.7-3.4-4-3.9.2 2 1.6 3.3 4 3.9Z"/><circle cx="9.6" cy="12" r=".5" fill="currentColor" stroke="none"/><circle cx="14.4" cy="12" r=".5" fill="currentColor" stroke="none"/><circle cx="12" cy="15.2" r=".5" fill="currentColor" stroke="none"/></svg></span>
+          <span class="scn__no">01</span>
+        </div>
         <h3>Ягода и самосбор</h3>
         <p>Развитие клубничного направления, расширение сортов, самосбор, семейные выходные, фермерская лавка, ягодные фестивали.</p>
         <div class="scn__tag">действующее направление</div>
       </div>
       <div class="scn reveal d1">
-        <div class="scn__no">02</div>
+        <div class="scn__top">
+          <span class="scn__ic"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20c0-8.5 5.5-15 14.5-15C19.5 15 13 20 5 20Z"/><path d="M5.5 19.5C8.5 15 12 12 16.5 9.5"/></svg></span>
+          <span class="scn__no">02</span>
+        </div>
         <h3>Агротуризм</h3>
         <p>Гостевые домики и барнхаусы, баня, фермерские завтраки, лесные прогулки, зимняя лыжня, заимка, сезонные маршруты, фермерский магазин.</p>
         <div class="scn__tag">потенциальный сценарий</div>
       </div>
       <div class="scn reveal">
-        <div class="scn__no">03</div>
+        <div class="scn__top">
+          <span class="scn__ic"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1.1 6.2a4 4 0 0 1-7.8 0L7 4Z"/><path d="M12 14.4V20"/><path d="M8.5 20h7"/></svg></span>
+          <span class="scn__no">03</span>
+        </div>
         <h3>Камерные мероприятия</h3>
         <p>Закрытые ужины, корпоративы до 100 гостей, семейные праздники, бренд-ивенты, гастро-вечера, ретриты и бизнес-клубы. Не массовая площадка — усадьба «с историей».</p>
         <div class="scn__tag">потенциальный сценарий</div>
       </div>
       <div class="scn reveal d1">
-        <div class="scn__no">04</div>
+        <div class="scn__top">
+          <span class="scn__ic"><svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M9 3v2.2c0 .6-.2 1.1-.6 1.6L7.2 8.4A3 3 0 0 0 6.5 10v8a3 3 0 0 0 3 3h5a3 3 0 0 0 3-3v-8a3 3 0 0 0-.7-1.6l-1.2-1.6a2.6 2.6 0 0 1-.6-1.6V3"/><path d="M6.5 12.5h11"/></svg></span>
+          <span class="scn__no">04</span>
+        </div>
         <h3>Фермерское производство</h3>
         <p>Ягодные заготовки, соки, морсы, варенье, сушёные ягоды, подарочные наборы, фермерская переработка и гастрономический бренд.</p>
         <div class="scn__tag">потенциальный сценарий</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===================== VISUAL · БАНЯ У ПРУДА ===================== -->
+<section class="showcase showcase--banya" aria-label="Баня у пруда">
+  <div class="showcase__cap reveal">
+    <span class="kicker">Атмосфера</span>
+    <h3>Баня у пруда, лес и тишина — то, за чем едут из города</h3>
   </div>
 </section>
 
@@ -616,6 +652,11 @@
       <h2>Массив, который можно развивать поэтапно</h2>
       <p>Объект включает жилую, фермерскую и хозяйственную части: дом, поля, хозпостройки, склад и производственное здание, а также зоны для будущего гостевого сценария и камерных событий.</p>
     </div>
+
+    <figure class="scheme-fig reveal" style="margin-top:52px">
+      <img src="assets/territory.jpg" alt="Территория усадьбы: луг, лошади, деревянные постройки на фоне леса" loading="lazy" />
+      <figcaption><span>Реальный вид территории — луг, постройки и лес по периметру</span></figcaption>
+    </figure>
 
     <figure class="scheme-fig reveal d1">
       <img src="assets/scheme.jpg" alt="Концептуальная схема участка: клубничное поле, основной дом, конюшня, баня, пруд, лес" loading="lazy" />
@@ -646,10 +687,16 @@
 <section class="band" id="location">
   <div class="wrap">
     <div class="loc">
-      <figure class="loc-fig reveal">
-        <img src="assets/satellite.jpg" alt="Спутниковый снимок участка: клубничное поле, строения, лес" loading="lazy" />
-        <figcaption>Спутниковый вид: клубничное поле, строения и лесное окружение. Ширина поля ~60 м.</figcaption>
-      </figure>
+      <div>
+        <figure class="loc-fig reveal" style="margin-bottom:14px">
+          <img src="assets/meadow.jpg" alt="Открытый луг усадьбы, лошади и стена леса по периметру" loading="lazy" />
+          <figcaption>Реальное окружение: открытый луг и лес по периметру.</figcaption>
+        </figure>
+        <figure class="loc-fig reveal d1">
+          <img src="assets/satellite.jpg" alt="Спутниковый снимок участка: клубничное поле, строения, лес" loading="lazy" />
+          <figcaption>Спутниковый вид: клубничное поле, строения и лесное окружение.</figcaption>
+        </figure>
+      </div>
       <div class="reveal d1">
         <span class="kicker">07 — Локация</span>
         <h2 style="margin-top:20px">Загородная тишина рядом с московским спросом</h2>
